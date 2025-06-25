@@ -19,7 +19,7 @@ class DriverLicenseUpdateForm(forms.ModelForm):
         if len(license_number) != 8:
             raise ValidationError("The field must have 8 characters")
 
-        if not license_number[:3].isupper():
+        if not (license_number[:3].isalpha() and license_number[:3].isupper()):
             raise ValidationError("The first 3 letters must be capitalized")
 
         if not license_number[3:].isdigit():
@@ -53,7 +53,7 @@ class DriverCreationForm(forms.ModelForm):
 
 class CarForm(forms.ModelForm):
     drivers = forms.ModelMultipleChoiceField(
-        queryset=get_user_model().objects.all(),
+        queryset=Driver.objects.all(),
         widget=forms.CheckboxSelectMultiple,
         required=False
     )
