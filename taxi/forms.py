@@ -8,10 +8,10 @@ from taxi.models import Driver, Car
 class DriverLicenseUpdateForm(forms.ModelForm):
     class Meta:
         model = Driver
-        fields = ('license_number',)
+        fields = ("license_number",)
 
     def clean_license_number(self):
-        license_number = self.cleaned_data.get('license_number')
+        license_number = self.cleaned_data.get("license_number")
 
         if not license_number:
             raise ValidationError("The field cannot be empty")
@@ -34,7 +34,7 @@ class DriverCreationForm(forms.ModelForm):
         fields = "__all__"
 
     def clean_license_number(self):
-        license_number = self.cleaned_data.get('license_number')
+        license_number = self.cleaned_data.get("license_number")
 
         if not license_number:
             raise ValidationError("The field cannot be empty")
@@ -57,6 +57,7 @@ class CarForm(forms.ModelForm):
         widget=forms.CheckboxSelectMultiple,
         required=False
     )
+
     class Meta:
         model = Car
         fields = "__all__"
